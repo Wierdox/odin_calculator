@@ -1,0 +1,134 @@
+:root {
+    --main-color: olive;
+    --bg-color:   darkslategray;
+
+    --dark-overlay: rgba(0, 0, 0, .5);
+
+    --hover-color:darkgreen;
+    --cold-color: rgb(101, 235, 101);
+    --hot-color:  cadetblue;
+
+    --big-wide: 32.75vh;
+    --button-size: 8.125vh;
+}
+
+* {
+    transition:            color 0.1s ease-in;
+    transition: background-color 0.1s ease-in;
+}
+
+body {
+    font-family: monospace;
+    font-size: 2vh;
+    min-width: none;
+    color:            var(--main-color);
+    background-color: var(--bg-color);
+}
+#ui { /* Box of buttons. */
+    padding: .8vh;
+    max-width: var(--big-wide);
+    min-width: var(--big-wide); /* Don't break grid if the window closes in.*/
+
+    outline-color: var(--dark-overlay);
+    outline-style: outset;
+}
+#output { /* Main number display. */
+    font-size: 4.5vh;
+    background-color: var(--dark-overlay);
+
+    padding: 0 1vh;
+    border-radius: 1vh;
+
+    margin-top:    1.0vh;
+    margin-bottom: 1.4vh;
+
+    min-width: var(--big-wide);
+    max-width: fit-content;
+}
+#bar { /* Line above output. */
+    border-radius: 4vh;
+    max-width: 34.5vh;
+    min-height: 1vh;
+    background-color: var(--hot-color);
+}
+
+/* Checkbox for floats, including some wacky copypasta from online. */
+input[type="checkbox"]:before{
+    position: relative;
+    display: block;
+    width:  2vh;
+    height: 2vh;
+    border: .25vh solid var(--dark-overlay);
+    content: "";
+    background: #999;
+}
+input[type="checkbox"]:after{
+    position: relative;
+    display: block;
+    left: .25vh;
+    top: -2vh;
+    width: 1.4vh;
+    height: 1.4vh;
+    border-width: .25vh;
+    border-style: solid;
+    border-color: var(--dark-overlay);
+    content: "";
+    background-repeat: no-repeat;
+    background-position:center;
+    
+}
+input[type="checkbox"]:checked:after{
+    background-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAQAAABuW59YAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAB2SURBVHjaAGkAlv8A3QDyAP0A/QD+Dam3W+kCAAD8APYAAgTVZaZCGwwA5wr0AvcA+Dh+7UX/x24AqK3Wg/8nt6w4/5q71wAAVP9g/7rTXf9n/+9N+AAAtpJa/zf/S//DhP8H/wAA4gzWj2P4lsf0JP0A/wADAHB0Ngka6UmKAAAAAElFTkSuQmCC'), linear-gradient(135deg, var(--main-color) 0%, var(--cold-color) 100%);
+}
+input {
+    margin-top: 1.2vh;
+    background-color: var(--main-color);
+
+    /*
+    Somehow, setting max-width/max-height fixes a bug where scaling browser height
+    wouldn't change the default checkbox texture size or whatver.
+    This is for the custom checkmark to work properly.
+    */
+    max-width:  3vh; 
+    max-height: 2vh;
+}
+label {
+    padding: .4vh 0;
+}
+label:hover {
+    user-select: none;
+    background-color: var(--dark-overlay);
+}
+label:active {
+    background-color: var(--hover-color);
+}
+
+/* Main buttons. */
+button {
+    font-weight: 600;
+    border-radius: 1vh;
+    height: var(--button-size);
+    width:  var(--button-size);
+    padding: 0;
+    margin:  0;
+    background-color: var(--cold-color);
+    border-color:     var(--bg-color);
+}
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+    color:            var(--main-color);
+    background-color: var(--dark-overlay);
+}
+button:hover {
+    background-color: var(--hover-color);
+}
+button:active {
+    background-color: var(--hot-color);
+    transform: translate(.15vh, .15vh);
+}
+/* Fix dumb visual where buttons get focused if you click then you press a key.*/
+button:focus,
+input:focus {
+    outline: none;
+}
